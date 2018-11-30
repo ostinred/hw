@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<style>
-		.items { display: flex; }
-		.item { width: 100px; height: 100px; background-color: #eee; box-sizing: border-box; transition: .25s;}
-		.is-active { border: 2px solid red; }
-	</style>
-</head>
-<body>
-	<div class='items'>
-		<!-- <div class="item" data-price='1500'>товар 1</div>
-		<div class="item" data-price='2500'>товар 2</div>
-		<div class="item" data-price='3500'>товар 3</div>
-		<div class="item" data-price='4500'>товар 4</div> -->
+  <head>
+    <title></title>
+    <style>
+      .items {
+        display: flex;
+      }
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: #eee;
+        box-sizing: border-box;
+        transition: 0.25s;
+      }
+      .is-active {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="items">
+      <!--
+        <div class="item" data-price='1500'>товар 1</div>
+        <div class="item" data-price='2500'>товар 2</div>
+        <div class="item" data-price='3500'>товар 3</div>
+        <div class="item" data-price='4500'>товар 4</div>
+      -->
 
-		<input type="text" name="number1" />
-		+
-		<input type="text" name="number2" />
+      <input type="text" name="number1" /> +
+      <input type="text" name="number2" />
 
-		<button type="button" class="button">=</button>
+      <button type="button" class="button">=</button>
 
-		<p class="result"></p>
+      <p class="result"></p>
+    </div>
+    <script type="text/javascript">
+      window.onload = function() {
+        const inputs = document.querySelectorAll('input');
+        const n1 = document.querySelector('input[name=number1]');
+        const n2 = document.querySelector('input[name=number2]');
 
-	</div>
-	<script type="text/javascript">
+        const button = document.querySelector('.button');
+        const result = document.querySelector('.result');
 
-		window.onload = function() {
-			const n1 = document.querySelector('input[name=number1]');
-			const n2 = document.querySelector('input[name=number2]');
-			const button = document.querySelector('.button');
-			const result = document.querySelector('.result');
+        button.onclick = function() {
+          const total = Number(n1.value) + Number(n2.value);
+          result.innerHTML = total;
+          this.setAttribute('disabled', '');
+        };
 
-			button.onclick = function() {
-				const total = Number(n1.value) + Number(n2.value);
-				result.innerHTML = total;
-				this.setAttribute('disabled', '');
-			}
-			
-			n1.addEventListener('change', removeDisabled);
-			n2.addEventListener('change', removeDisabled);
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].oninput = function() {
+            button.removeAttribute('disabled');
+          };
+        }
+      };
 
-			function removeDisabled(){
-				button.removeAttribute('disabled');
-			}
-		}
+      // const items = document.querySelectorAll('.items .item');
+      // const value = document.querySelector('.value');
 
-		// const items = document.querySelectorAll('.items .item');
-		// const value = document.querySelector('.value');
+      // for(let i=0; i<items.length; i++){
+      // 	items[i].onclick = function() {
+      // 		this.classList.toggle('is-active');
+      // 		calcPrice();
+      // 	}
+      // }
 
-		// for(let i=0; i<items.length; i++){
-		// 	items[i].onclick = function() {
-		// 		this.classList.toggle('is-active');
-		// 		calcPrice();
-		// 	}	
-		// }
+      // function calcPrice(){
+      // 	var price = 0;
 
-		// function calcPrice(){
-		// 	var price = 0;
+      // 	for(let i=0; i<items.length; i++){
+      // 		if(items[i].classList.contains('is-active')) {
+      // 			price += Number(items[i].getAttribute('data-price'));
+      // 		}
+      // 	}
 
-		// 	for(let i=0; i<items.length; i++){
-		// 		if(items[i].classList.contains('is-active')) {
-		// 			price += Number(items[i].getAttribute('data-price'));
-		// 		} 
-		// 	}
-
-		// 	value.innerHTML = price;
-		// }
-		
-	</script>
-</body>
+      // 	value.innerHTML = price;
+      // }
+    </script>
+  </body>
 </html>
