@@ -5,6 +5,7 @@
     <style>
       .items {
         display: flex;
+        align-items: center;
       }
       .item {
         width: 100px;
@@ -13,47 +14,106 @@
         box-sizing: border-box;
         transition: 0.25s;
       }
+
       .is-active {
         border: 2px solid red;
+      }
+
+      input {
+        width: 100px;
+        height: 40px;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 20px;
+      }
+
+      button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        background-color: #fff;
       }
     </style>
   </head>
   <body>
     <div class="items">
-      <!--
-        <div class="item" data-price='1500'>товар 1</div>
-        <div class="item" data-price='2500'>товар 2</div>
-        <div class="item" data-price='3500'>товар 3</div>
-        <div class="item" data-price='4500'>товар 4</div>
-      -->
-
-      <input type="text" name="number1" /> +
-      <input type="text" name="number2" />
-
-      <button type="button" class="button">=</button>
+      <input type="text" name="number1" /> <input type="text" name="number2" />
+      <span>=</span>
 
       <p class="result"></p>
     </div>
+    <div class="buttons">
+      <button type="button" class="button" name="plus">+</button>
+      <button type="button" class="button" name="minus">-</button>
+      <button type="button" class="button" name="multiplication">*</button>
+      <button type="button" class="button" name="division">/</button>
+      <button type="button" class="button" name="power">^</button>
+    </div>
+
     <script type="text/javascript">
       window.onload = function() {
-        const inputs = document.querySelectorAll('input');
+        // const inputs = document.querySelectorAll('input');
         const n1 = document.querySelector('input[name=number1]');
         const n2 = document.querySelector('input[name=number2]');
 
-        const button = document.querySelector('.button');
+        const btnPlus = document.querySelector('button[name=plus]');
+        const btnMinus = document.querySelector('button[name=minus]');
+        const btnMultiplication = document.querySelector(
+          'button[name=multiplication]'
+        );
+        const btnDivision = document.querySelector('button[name=division]');
+        const btnPower = document.querySelector('button[name=power]');
+
         const result = document.querySelector('.result');
 
-        button.onclick = function() {
-          const total = Number(n1.value) + Number(n2.value);
-          result.innerHTML = total;
-          this.setAttribute('disabled', '');
+        btnPlus.onclick = function() {
+          result.innerHTML = Number(n1.value) + Number(n2.value);
         };
 
-        for (let i = 0; i < inputs.length; i++) {
-          inputs[i].oninput = function() {
-            button.removeAttribute('disabled');
-          };
-        }
+        btnMinus.onclick = function() {
+          result.innerHTML = Number(n1.value) - Number(n2.value);
+        };
+
+        btnMultiplication.onclick = function() {
+          result.innerHTML = Number(n1.value) * Number(n2.value);
+        };
+
+        btnDivision.onclick = function() {
+          result.innerHTML = Number(n1.value) / Number(n2.value);
+        };
+
+        btnPower.onclick = function() {
+          let number = Number(n1.value);
+          let itterations = Number(n2.value);
+
+          for (let i = 0; i < itterations; i++) {
+            number *= number;
+          }
+
+          console.log(number);
+
+          // result.innerHTML = number;
+        };
+
+        // console.log(
+        //   btnPlus,
+        //   btnMinus,
+        //   btnMultiplication,
+        //   btnDivision,
+        //   btnPower
+        // );
+
+        // button.onclick = function() {
+        //   const total = Number(n1.value) + Number(n2.value);
+        //   result.innerHTML = total;
+        //   this.setAttribute('disabled', '');
+        // };
+
+        // for (let i = 0; i < inputs.length; i++) {
+        //   inputs[i].oninput = function() {
+        //     button.removeAttribute('disabled');
+        //   };
+        // }
       };
 
       // const items = document.querySelectorAll('.items .item');
